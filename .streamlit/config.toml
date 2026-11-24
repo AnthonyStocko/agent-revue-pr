@@ -1,0 +1,8 @@
+[server]
+port = 8508
+address = "127.0.0.1"
+headless = true
+
+[secrets]
+# Connexion OIDC : mêmes réglages que les autres agents (aucune copie)
+files = ["../agent-scrum-master/.streamlit/secrets.toml"]
