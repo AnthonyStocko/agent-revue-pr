@@ -11,6 +11,7 @@ import sys
 import streamlit as st
 from dotenv import load_dotenv
 
+from agent_socle import ihm
 from agent_socle import auth_tools, config_commune
 from agent_socle.chemins import DATA_DIR
 from agent_socle.ihm import interruption_cause, run_main_step
@@ -29,6 +30,11 @@ if not os.getenv("CLAUDE_CONFIG_DIR", "").strip():
 
 # Connexion OIDC (AGENT_AUTH) : rien n'est affiché ni exécuté avant elle
 CONNECTED = auth_tools.require_login(st)
+
+# Travaux en cours (agent_socle.ihm) : tâches de l'agent lancées hors de la session, contexte de page de l'auteur
+ihm.AGENT, ihm.CONTEXTE = "revue-pr", ()
+ihm.restaurer_contexte()
+ihm.travaux_en_cours()
 
 
 REVIEW_VERDICTS = {"approuver": "✅ Peut être approuvée", "changements_demandes": "⛔ Changements à demander",
@@ -225,3 +231,6 @@ st.title("🔍 Revue de PR")
 if CONNECTED:
     st.caption(f"Connecté : {auth_tools.label(CONNECTED)}")
 render_review_tab()
+
+# Choix de la page enregistrés pour la reconnexion (.tmp/sessions/<auteur>/<agent>.json)
+ihm.memoriser_contexte()

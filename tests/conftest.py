@@ -69,3 +69,6 @@ def _isolement(tmp_path, monkeypatch):
     monkeypatch.setenv("GROUNDCOVER_MCP_ENABLED", "0")
     monkeypatch.setenv("AGENT_RUN_LOGS_DIR", str(tmp_path / "logs"))
     monkeypatch.setenv("AGENT_JOURNAL_PATH", str(tmp_path / "journal_technique.log"))
+    # Travaux en cours et contexte de page des tests : jamais dans le vrai .tmp
+    monkeypatch.setenv("AGENT_TACHES_DIR", str(tmp_path / "taches"))
+    monkeypatch.setenv("AGENT_SESSIONS_DIR", str(tmp_path / "sessions"))
