@@ -4,5 +4,5 @@ address = "127.0.0.1"
 headless = true
 
 [secrets]
-# Connexion OIDC : mêmes réglages que les autres agents (aucune copie)
-files = ["../agent-scrum-master/.streamlit/secrets.toml"]
+# Connexion OIDC : mêmes réglages que les autres agents, dans AGENT_DATA_DIR (aucune copie)
+files = ["../agent-data/.streamlit/secrets.toml"]
